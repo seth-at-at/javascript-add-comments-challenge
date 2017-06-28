@@ -1,47 +1,36 @@
 $(document).ready(function(){
   $('#new_comment_button').click(function(e){
     e.preventDefault();
-    $('body').append('<form id=new_comment style="display: inline;"></form>')
-    $('#new_comment').append("<input").append("<textarea type='textarea' placeholder='Comment Body'" )
+    // $('body').append('<form id=new_comment style="display: inline;">').append("<textarea type='textarea' placeholder='Comment Body'" ).append("</form>")
 
 
     // + $('input[name="submit"]') + "</li>"
+    const form    = document.createElement("form")
+    const comment = document.createElement("textarea")
+    const author  = document.createElement("input")
+    const submit  = document.createElement("input")
 
+    form.id             = 'new_comment'
+    form.style          = "display: block;"
+    comment.placeholder = 'Your text here'
+    author.id           = "authorName"
+    author.type         = "text"
+    author.placeholer   = "Your Name"
+    submit.type         = "submit"
+    submit.placeholder  = "submit"
 
+    form.appendChild(author);
+    form.appendChild(comment);
+    form.appendChild(submit);
 
-    // var f = document.createElement("form");
-    // f.setAttribute('id',"banana");
-    // f.setAttribute('method',"post");
-    // $(f).css('display','none');
-    //
-    //
-    //
-    // var author = document.createElement("input"); //author element, text
-    // author.setAttribute('placeholder','Your Name');
-    // author.setAttribute('type',"authorName");
-    // author.setAttribute('name',"author");
-    //
-    // var body = document.createElement("textarea"); //body element, text
-    // body.setAttribute('placeholder','Comment Body');
-    // body.setAttribute('type',"textarea");
-    // body.setAttribute('name',"body");
-    //
-    // var submit = document.createElement("input"); //body element, Submit button
-    // submit.setAttribute('type',"submit");
-    // submit.setAttribute('value',"Submit");
-    //
-    // f.appendChild(author);
-    // f.appendChild(body);
-    // f.appendChild(submit);
-    //
-    // document.getElementsByTagName('body')[0].appendChild(f);
-    //
-    // $(submit).click(function(e){
-    //   e.preventDefault();
-    //   $('#comment_list').append($('input[name="submit"]').val());
-    //   var new_comment = document.createElement("li");
-    //   new_comment.setAttribute('body',$(body).val());
-    //   $('ul#comment_list').append(new_comment)
-    // });
+    document.getElementsByTagName('body')[0].appendChild(form);
+
+    $(submit).click(function(e){
+      e.preventDefault();
+      console.log($('#comment_list'));
+      console.log($(author).val());
+      console.log($(comment).val());
+      $('#comment_list').append(`<li>${$(comment).val()}<span class="author">${$(author).val()}</span></li>`);
+    });
   });
 });
