@@ -24,13 +24,12 @@ $(document).ready(function(){
     form.appendChild(submit);
 
     document.getElementsByTagName('body')[0].appendChild(form);
-
     $(submit).click(function(e){
       e.preventDefault();
-      console.log($('#comment_list'));
-      console.log($(author).val());
-      console.log($(comment).val());
+      if ($(author).val() && $(comment).val()) {
       $('#comment_list').append(`<li>${$(comment).val()}<span class="author">${$(author).val()}</span></li>`);
+      $(new_comment).toggle()
+    }
     });
   });
 });
